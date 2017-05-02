@@ -24,8 +24,9 @@ SECRET_KEY = 'px#(+oznss^91qd7p8kt(##pt5-wdb2)p5fe%gznqme7)@z6md'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+ 
+# Allow all host headers
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -119,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
@@ -126,5 +128,5 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT =os.path.join(BASE_DIR, "static_cdn")
-MEDIA_ROOT =os.path.join(BASE_DIR, "media_cdn") #agreagar esto
+MEDIA_ROOT =os.path.join(BASE_DIR, "media_cdn")
 PROTECTED_ROOT =os.path.join(BASE_DIR, "protected")
