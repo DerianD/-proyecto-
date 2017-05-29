@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+{%load staticfiles%}
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Perfil</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.0/css/bulma.min.css">
+  
+  <link rel="stylesheet" type="text/css" href="{% static "css/profile.css" %}">
+</head>
+<body>
+  <div class="hero-head">
+      <header class="nav">
+        <div class="container">
+          <div class="nav-left">
+            <a class="nav-item" href="{% url 'home' %}">
+              <h1 class="title is-3">
+                SmartLock
+              </h1>
+            </a>
+          </div>
+          {% include "menu.html" %}
+            
+                      {% if user.is_authenticated %}
+                        <span class="nav-item">
+              <a class="button is-info is-inverted" href="{% url 'logout' %}">
+                <span class="icon">
+                  <i class="icon-user"></i>
+                </span>
+                <span>Salir</span>
+              </a>
+            </span>
+                        {% else %}
+                          
+                       <span class="nav-item">
+              <a class="button is-info is-inverted" href="{% url 'login' %}">
+                <span class="icon">
+                  <i class="icon-user"></i>
+                </span>
+                <span>Login</span>
+              </a>
+            </span>
+                        {% endif %}
+        </div>
+      </header>
+    </div>
+  <div class="container profile">
+
+    <div class="section profile-heading">
+      <div class="columns">
+        <div class="column is-2">
+          <div class="image is-128x128 avatar">
+            <img src="https://placehold.it/256x256">
+          </div>
+        </div>
+        <div class="column is-4 name">
+          <p>
+            <span class="title is-bold">{{user.username}}</span>
+          </p>
+          <p class="tagline">Bienvenido a tu perfil, puesde administrar y ver tus estadisticas y progreso.
+   {{user.id}}
+
+
+          </p>
+        </div>
+        <div class="column is-2 followers has-text-centered">
+          {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                 <p class="stat-val">{{Membership.usuario.edad}}</p>
+                 <p class="stat-key">Edad</p>
+              {% else %}
+              {% endif %} {%empty%}
+          {%endfor%}
+          
+        </div>
+        <div class="column is-2 following has-text-centered">
+           {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                 <p class="stat-val">{{Membership.ultimaconexion}}</p>
+                 <p class="stat-key">Ultima Entrada</p>
+              {% else %}
+              {% endif %} {%empty%}
+          {%endfor%}
+        </div>
+        <div class="column is-2 likes has-text-centered">
+           {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                 <p class="stat-val">{{Membership.usuario.progreso}}</p>
+                 <p class="stat-key">Progreso</p>
+              {% else %}
+              {% endif %} {%empty%}
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+    <div class="profile-options">
+      <div class="tabs is-fullwidth">
+        <ul>
+          <li class="link is-active"><a><span class="icon" ><i class="fa fa-info"></i></span> <span>Aplicaciones</span></a></li>
+        </ul>
+      </div>
+    </div>
+ <div class="box">
+      <!-- Main container -->
+      <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+          <div class="level-item">
+            <p class="subtitle is-5">
+              {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                <strong>Aplicaciones:</strong> {{Membership.id}}
+              {% else %}
+              {% endif %} {%empty%}
+          {%endfor%}
+            </p>
+          </div>
+          <div class="level-item">
+            <p class="control has-addons">
+              <input class="input" type="text" placeholder="Buscar Aplicacion">
+              <button class="button">
+                Buscar
+              </button>
+            </p>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="level-right">
+          <p class="level-item"><strong>
+            {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                 Estado {{Membership.conexion}}
+              {% else %}
+              {% endif %} {%empty%}
+          {%endfor%}
+            </strong></p>
+        </div>
+      </nav>
+    </div>
+    <div class="spacer"></div>
+
+    <div class="columns">
+      
+      {%for Membership in us%}
+
+      {% if Membership.id == user.id %}
+         
+         <div class="column is-3">
+        <div class="card">
+          <div class="card-image">
+            <figure class="image is-4by3">
+              <img src="http://placehold.it/300x225" alt="">
+            </figure>
+          </div>
+          <div class="card-content">
+            <div class="content">
+              <span class="tag is-dark">App: {{Membership.apps.nombre}}</span>
+              
+            </div>
+          </div>
+        </div>
+        <br>
+        
+      </div>
+      
+      {% else %}
+        
+      {% endif %}
+  {%empty%}
+    <h1>No hay aplicaciones disponibles</h1>
+  {%endfor%}
+     
+     
+
+    </div>
+  </div>
+</body>
+</html>
