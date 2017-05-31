@@ -67,9 +67,9 @@
           </p>
         </div>
         <div class="column is-2 followers has-text-centered">
-          {%for usuario in us%}
-              {% if usuario.id == user.id %}
-                 <p class="stat-val">{{usuario.edad}}</p>
+          {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                 <p class="stat-val">{{Membership.usuario.edad}}</p>
                  <p class="stat-key">Edad</p>
               {% else %}
               {% endif %} {%empty%}
@@ -86,9 +86,9 @@
           {%endfor%}
         </div>
         <div class="column is-2 likes has-text-centered">
-           {%for usuario in us%}
-              {% if usuario.id == user.id %}
-                 <p class="stat-val">{{usuario.progreso}}</p>
+           {%for Membership in us%}
+              {% if Membership.id == user.id %}
+                 <p class="stat-val">{{Membership.usuario.progreso}}</p>
                  <p class="stat-key">Progreso</p>
               {% else %}
               {% endif %} {%empty%}
@@ -99,83 +99,16 @@
     <div class="profile-options">
       <div class="tabs is-fullwidth">
         <ul>
-          <li class="link is-active"><a href="{%url 'nueva_info'%}"><span class="icon" ><i class="fa fa-info"></i></span> <span>Agregar Informacion</span></a></li>
-        </ul>
-        <ul>
-          <li class="link is-active"><a href="/usuario/{{user.id}}/editar"><span class="icon" ><i class="fa fa-info"></i></span> <span>Editar Informacion</span></a></li>
+          <li class="link is-active"><a href=""><span class="icon" ><i class="fa fa-info"></i></span> <span>Agregar Info</span></a></li>
         </ul>
       </div>
     </div>
- <div class="box">
-      <!-- Main container -->
-      <nav class="level">
-        <!-- Left side -->
-        <div class="level-left">
-          <div class="level-item">
-            <p class="subtitle is-5">
-              {%for Membership in us%}
-              {% if Membership.id == user.id %}
-                <strong>Aplicaciones:</strong> {{Membership.id}}
-              {% else %}
-              {% endif %} {%empty%}
-          {%endfor%}
-            </p>
-          </div>
-          <div class="level-item">
-            <p class="control has-addons">
-              <input class="input" type="text" placeholder="Buscar Aplicacion">
-              <button class="button">
-                Buscar
-              </button>
-            </p>
-          </div>
-        </div>
 
-        <!-- Right side -->
-        <div class="level-right">
-          <p class="level-item"><strong>
-            {%for Membership in us%}
-              {% if Membership.id == user.id %}
-                 Estado {{Membership.conexion}}
-              {% else %}
-              {% endif %} {%empty%}
-          {%endfor%}
-            </strong></p>
-        </div>
-      </nav>
-    </div>
     <div class="spacer"></div>
 
     <div class="columns">
 
-      {%for Membership in us%}
 
-      {% if Membership.id == user.id %}
-
-         <div class="column is-3">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">App: {{Membership.apps.nombre}}</span>
-
-            </div>
-          </div>
-        </div>
-        <br>
-
-      </div>
-
-      {% else %}
-
-      {% endif %}
-  {%empty%}
-    <h1>No hay aplicaciones disponibles</h1>
-  {%endfor%}
 
   {%block content%}
 

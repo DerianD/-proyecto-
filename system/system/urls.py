@@ -31,4 +31,6 @@ urlpatterns = [
     url(r'^registrar/$', UserRegisterView.as_view(), name='Registro'),
     url('^', include('django.contrib.auth.urls')),
     url(r'^detalle/(?P<object_id>\d+)/$', views.detalle, name='detalle'),
+    url(r'^usuario/(?P<object_id>\d+)/editar$', views.actualizar, name='actualizar'),
+    url(r'^crear_info/$', views.agregar_info, name='nueva_info'),
 ]
