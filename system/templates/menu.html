@@ -10,20 +10,16 @@
             <a class="nav-item" href="{% url 'nosotros' %}">
               Nosotros
             </a>
-            
+
             {% if user.is_authenticated %}
-                      <a class="nav-item" href="/perfil/">
+                      <a class="nav-item" href="/perfil/{{user.id}}">
                         Perfil
-                      </a> 
-                      <a class="nav-item" href="/usuarios/">
-                        Lista de usuarios
-                      </a>  
+                      </a>
 
                         {% else %}
-                          
+
                         <a class="nav-item" href="{% url 'Registro' %}">
                         Registrarse
-                      </a>  
+                      </a>
 
                         {% endif %}
-        
