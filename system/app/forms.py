@@ -1,8 +1,8 @@
 from django import forms
 
-from .models import usuario
+from .models import usuario,apps
 
-class LibroModelForm(forms.ModelForm):
+class userModelForm(forms.ModelForm):
     class Meta:
         model=usuario
         fields=[
@@ -12,13 +12,11 @@ class LibroModelForm(forms.ModelForm):
             "pcUser",
         ]
         labels={
-            "nombre":"Cual es el nombre",
-            "progreso":"Cual es tu progreso",
-            "edad":"Cual es tu edad",
-            "pcUser":"Como se llama el pc"
+            "nombre":"Cuale es tu nombre"
         }
         widgets={
-            "nombre":forms.TextInput(attrs={'class':'form-control','placeholder':'Ponga el nombre'}),
-            "progreso":forms.Textarea(attrs={'class':'form-control'}),
-            "edad":forms.NumberInput(attrs={'class':'form-control'})
+            "nombre":forms.TextInput(attrs={'class':'input','placeholder':'Ingresa tu nombre...'}),
+            "edad":forms.NumberInput(attrs={'class':'input','placeholder':'Ingresa tu edad...'}),
+            "progreso":forms.TextInput(attrs={'class':'input','placeholder':'Ingresa tu progreso...'}),
+            "pcUser":forms.TextInput(attrs={'class':'input','placeholder':'Ingresa nombre del pc...'}),
         }

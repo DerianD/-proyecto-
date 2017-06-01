@@ -8,7 +8,7 @@
   <title>Perfil</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.1.0/css/bulma.min.css">
-
+  
   <link rel="stylesheet" type="text/css" href="{% static "css/profile.css" %}">
 </head>
 <body>
@@ -23,7 +23,7 @@
             </a>
           </div>
           {% include "menu.html" %}
-
+            
                       {% if user.is_authenticated %}
                         <span class="nav-item">
               <a class="button is-info is-inverted" href="{% url 'logout' %}">
@@ -34,7 +34,7 @@
               </a>
             </span>
                         {% else %}
-
+                          
                        <span class="nav-item">
               <a class="button is-info is-inverted" href="{% url 'login' %}">
                 <span class="icon">
@@ -63,21 +63,21 @@
           <p class="tagline">Bienvenido a tu perfil, puesde administrar y ver tus estadisticas y progreso.
    {{user.id}}
 
-
           </p>
         </div>
         <div class="column is-2 followers has-text-centered">
-          {%for usuario in us%}
+          {%for usuario in userr%}
               {% if usuario.id == user.id %}
                  <p class="stat-val">{{usuario.edad}}</p>
                  <p class="stat-key">Edad</p>
               {% else %}
               {% endif %} {%empty%}
           {%endfor%}
-
+          
         </div>
         <div class="column is-2 following has-text-centered">
            {%for Membership in us%}
+           
               {% if Membership.id == user.id %}
                  <p class="stat-val">{{Membership.ultimaconexion}}</p>
                  <p class="stat-key">Ultima Entrada</p>
@@ -86,7 +86,7 @@
           {%endfor%}
         </div>
         <div class="column is-2 likes has-text-centered">
-           {%for usuario in us%}
+           {%for usuario in userr%}
               {% if usuario.id == user.id %}
                  <p class="stat-val">{{usuario.progreso}}</p>
                  <p class="stat-key">Progreso</p>
@@ -99,10 +99,7 @@
     <div class="profile-options">
       <div class="tabs is-fullwidth">
         <ul>
-          <li class="link is-active"><a href="{%url 'nueva_info'%}"><span class="icon" ><i class="fa fa-info"></i></span> <span>Agregar Informacion</span></a></li>
-        </ul>
-        <ul>
-          <li class="link is-active"><a href="/usuario/{{user.id}}/editar"><span class="icon" ><i class="fa fa-info"></i></span> <span>Editar Informacion</span></a></li>
+          <li class="link is-active"><a href="/usuario/{{user.id}}/editar/"><span class="icon" ><i class="fa fa-user"></i></span> <span>Editar Perfil</span></a></li>
         </ul>
       </div>
     </div>
@@ -121,14 +118,18 @@
           {%endfor%}
             </p>
           </div>
+          <form class="navbar-form navbar-right" action="." method="GET">
           <div class="level-item">
             <p class="control has-addons">
-              <input class="input" type="text" placeholder="Buscar Aplicacion">
+              
+              <input class="input" type="text" name="q"  placeholder="Buscar Aplicacion" value="{{ bs|escape }}">
               <button class="button">
                 Buscar
               </button>
+
             </p>
           </div>
+          </form>
         </div>
 
         <!-- Right side -->
@@ -147,11 +148,11 @@
     <div class="spacer"></div>
 
     <div class="columns">
+      
+      {%for apps in use%}
 
-      {%for Membership in us%}
-
-      {% if Membership.id == user.id %}
-
+      {% if user.id == apps.ident %}
+         
          <div class="column is-3">
         <div class="card">
           <div class="card-image">
@@ -161,27 +162,23 @@
           </div>
           <div class="card-content">
             <div class="content">
-              <span class="tag is-dark">App: {{Membership.apps.nombre}}</span>
-
+              <span class="tag is-dark">App: {{apps.nombre}}</span>
+              
             </div>
           </div>
         </div>
         <br>
-
+        
       </div>
-
+      
       {% else %}
-
+        
       {% endif %}
   {%empty%}
     <h1>No hay aplicaciones disponibles</h1>
   {%endfor%}
-
-  {%block content%}
-
-
-
-  {%endblock%}
+     
+     
 
     </div>
   </div>

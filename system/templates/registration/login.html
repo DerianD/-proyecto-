@@ -5,9 +5,9 @@
                         <p class="title is-3">Yu ya estas logueado como {{user.username}}, puedes iniciar con otra cuenta.</p>
                         {% else %}
                           <p class="title is-3">Iniciar Sesion</p>
-                        {% endif %}
+                        {% endif %} 
   {% endblock info %}
-
+         
 {% block content %}
 
 <form method="post" action="{% url 'login' %}">
@@ -22,15 +22,15 @@
                 <div class="login-form">
                   <p class="control has-icon has-icon-right">
                     <input class="input email-input" name="username" autofocus required id="id_username" type="text" placeholder="jsmith@example.org">
-
+                    
                     <span class="icon user">
                       <i class="fa fa-user"></i>
                     </span>
-
+                    
                   </p>
                   <p class="control has-icon has-icon-right">
                     <input class="input password-input" type="password" name="password" required id="id_password" placeholder="●●●●●●●">
-
+                    
                     <span class="icon user">
                       <i class="fa fa-lock"></i>
                     </span>
@@ -42,11 +42,10 @@
                 <div class="section forgot-password">
                   <p class="has-text-centered">
                     <a href="{% url 'password_reset' %}">No recuerda su contraseña</a>
-                    <a href="{% url 'home' %}">Inicio</a>
                       {% if form.errors %}
-                        <a>Tu usuario o contraseña deben coincidir.</a>
+                        <a>Tu usuario o contraseña deben coinsidir.</a>
                       {% endif %}
-
+                     <a href="{% url 'home' %}">Inicio</a>
                   </p>
                 </div>
               </div>
@@ -56,3 +55,6 @@
     <input type="hidden" name="next" value="{% url 'perfil' %}" />
 </form>
 {% endblock %}
+
+
+
